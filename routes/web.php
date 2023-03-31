@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -28,9 +29,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::get('/posts', [PostController::class, 'index']);
-    Route::get('/posts/{post}', [PostController::class, 'show']);
+    Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
+    Route::get('/comments/data', [CommentController::class, 'data'])->name('comments.data');
 });
 
 require __DIR__.'/auth.php';
